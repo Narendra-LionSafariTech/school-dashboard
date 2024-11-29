@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
+import Header from "../layouts/core/Header";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +35,7 @@ const LoginPage = () => {
         // background: "linear-gradient(166deg, #fff, #0fccce)",
       }}
     >
+      {/* <Header/> */}
       <Card
         sx={{
           maxWidth: 400,

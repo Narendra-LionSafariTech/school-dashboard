@@ -41,7 +41,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       >
         {isOpen && (
           <Typography variant="h6" color="inherit">
-            <img src="/assets/logo/logo.webp" width={42} height={42} style={{borderRadius:"50%"}} />
+            {/* <img src="/assets/logo/logo.webp" width={42} height={42} style={{borderRadius:"50%"}} /> */}
+            <img src="/assets/logo/exam_logo.jpeg" width={42} height={42} style={{borderRadius:"50%"}} />
           </Typography>
         )}
         <IconButton color="inherit" onClick={toggleSidebar}>

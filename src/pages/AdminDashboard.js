@@ -1,8 +1,13 @@
 import React from 'react'
+import AdminTable from '../components/CustomTable.js/AdminTable'
+import ExamCenterDetailsTable from '../components/CustomTable.js/ExamCenterDetailsTable'
 
 const AdminDashboard = () => {
   return (
-    <div>AdminDashboard</div>
+    <div>
+      {/* <AdminTable/> */}
+      <ExamCenterDetailsTable/>
+    </div>
   )
 }
 
