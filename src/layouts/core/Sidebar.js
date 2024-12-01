@@ -23,9 +23,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       sx={{
         "& .MuiDrawer-paper": {
           width: isOpen ? 240 : 60, // Full width when open, reduced to icon width when closed
-          transition: "width 0.3s ease", // Smooth transition
-          backgroundColor: "#222",
-          color: "#fff",
+          transition: "width 0.3s ease",
+          // backgroundColor: "#222",
+          // color: "#fff",
           overflowX: "hidden",
         },
       }}
@@ -41,7 +41,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       >
         {isOpen && (
           <Typography variant="h6" color="inherit">
-            {/* <img src="/assets/logo/logo.webp" width={42} height={42} style={{borderRadius:"50%"}} /> */}
             <img src="/assets/logo/exam_logo.jpeg" width={42} height={42} style={{borderRadius:"50%"}} />
           </Typography>
         )}
@@ -51,19 +50,25 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </Box>
       <List>
         <ListItem button>
-          <ListItemIcon sx={{ color: "#fff" }}>
+          <ListItemIcon sx={{ color: "#dadada" }}>
             <HomeIcon />
           </ListItemIcon>
           {isOpen && <ListItemText primary="Dashboard" />}
         </ListItem>
         <ListItem button>
-          <ListItemIcon sx={{ color: "#fff" }}>
+          <ListItemIcon sx={{ color: "#dadada" }}>
             <SettingsIcon />
           </ListItemIcon>
-          {isOpen && <ListItemText primary="Settings" />}
+          {isOpen && <ListItemText primary="Analatics" />}
         </ListItem>
         <ListItem button>
-          <ListItemIcon sx={{ color: "#fff" }}>
+          <ListItemIcon sx={{color: "#dadada" }}>
+            <SettingsIcon />
+          </ListItemIcon>
+          {isOpen && <ListItemText primary="Operator" />}
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon sx={{ color: "#dadada" }}>
             <LogoutIcon />
           </ListItemIcon>
           {isOpen && <ListItemText primary="Logout" />}

@@ -3,7 +3,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import TableHeaderTitle from './TableHeaderTitle';
+import HeaderTitle from '../common/HeaderTitle';
 import {student} from '../../data/customData'
 const columns = [
   { field: 'id', headerName: 'No.', width: 70 },
@@ -79,7 +79,7 @@ useEffect(()=>{
 },[])
   return (
     <div style={{ height: 600, width: '100%', marginTop: '20px' }}>
-      <TableHeaderTitle title="Students" />
+      <HeaderTitle title="Students" />
       <DataGrid
         style={{ backgroundColor: 'white' }}
         rows={rows}

@@ -2,7 +2,7 @@ import React from "react";
 import HouseIcon from "@mui/icons-material/House";
 import { Box, Typography } from "@mui/material";
 
-const TableHeaderTitle = ({ title,subTitle }) => {
+const HeaderTitle = ({ title,subTitle }) => {
   return (
     <Box 
       display="flex" 
@@ -23,4 +23,4 @@ const TableHeaderTitle = ({ title,subTitle }) => {
   );
 };
 
-export default TableHeaderTitle;
+export default HeaderTitle;

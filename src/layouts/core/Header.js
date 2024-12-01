@@ -23,18 +23,10 @@ const Header = ({ toggleSidebar }) => {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{backgroundColor:"#fff"}}>
       <Toolbar>
-        {/* <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={toggleSidebar}
-        >
-          <MenuIcon />
-        </IconButton> */}
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          Admin Dashboard
+        <Typography variant="h6" sx={{ flexGrow: 1,color:"#000" }}>
+          Exam Dashboard
         </Typography>
         <Box>
           <Avatar
