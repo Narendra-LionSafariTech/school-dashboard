@@ -1,1 +1,1 @@
-exports.baseUrl="http://5.223.46.101/api/v1"
+exports.baseUrl="https://croireadmin.el.r.appspot.com"

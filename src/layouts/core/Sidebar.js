@@ -51,7 +51,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       <List>
         <ListItem button>
           <ListItemIcon sx={{ color: "#dadada" }}>
-            <HomeIcon />
+            {/* <HomeIcon /> */}
+            <img src="/assets/icons/home.svg" width={30} height={30} alt="home"/>
           </ListItemIcon>
           {isOpen && <ListItemText primary="Dashboard" />}
         </ListItem>
@@ -59,7 +60,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <ListItemIcon sx={{ color: "#dadada" }}>
             <SettingsIcon />
           </ListItemIcon>
-          {isOpen && <ListItemText primary="Analatics" />}
+          {isOpen && <ListItemText primary="Analytics" />}
         </ListItem>
         <ListItem button>
           <ListItemIcon sx={{color: "#dadada" }}>

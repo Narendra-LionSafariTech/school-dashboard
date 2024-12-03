@@ -62,48 +62,39 @@ const AdminDashboard = () => {
   ];
   return (
     <div>
-      <HeaderTitle
-        title="2024_November_Raicher University Exam"
-        subTitle="Exam Center Details"
-      />
-
-      <FilterComponent
-        centerCode={centerCode}
-        setCenterCode={setCenterCode}
-        shiftTime={shiftTime}
-        setShiftTime={setShiftTime}
-        examName={examName}
-        setExamName={setExamName}
-        handleFilterSubmit={handleFilterSubmit}
-        rows={rows}
-      />
       <Container sx={{ mt: 4 }}>
+        <HeaderTitle
+          title="2024_November_Raicher University Exam"
+          subTitle="Exam"
+        />
+
         <Grid2 container spacing={3}>
           <Grid2 item size={{ xs: 12, sm: 4 }}>
             <HeaderStatsCard
-              title="Active Sales"
-              value="$32,912"
+              title="Total Students"
+              value="32,912"
               change={12}
               detailsLink="#"
             />
           </Grid2>
           <Grid2 item size={{ xs: 12, sm: 4 }}>
             <HeaderStatsCard
-              title="Product Revenue"
-              value="$18,680"
+              title="Present Students"
+              value="18,680"
               change={10}
               detailsLink="#"
             />
           </Grid2>
           <Grid2 item size={{ xs: 12, sm: 4 }}>
             <HeaderStatsCard
-              title="Product Sold"
-              value="$3,423"
+              title="Absent Students"
+              value="3,423"
               change={9}
               detailsLink="#"
             />
           </Grid2>
-
+        </Grid2>
+        <Grid2 container spacing={3} marginY={2}>
           <Grid2 item size={{ xs: 12, md: 8 }}>
             <Analytics data={analyticsData} />
           </Grid2>
@@ -115,8 +106,16 @@ const AdminDashboard = () => {
             />
           </Grid2>
         </Grid2>
-
-
+        <FilterComponent
+          centerCode={centerCode}
+          setCenterCode={setCenterCode}
+          shiftTime={shiftTime}
+          setShiftTime={setShiftTime}
+          examName={examName}
+          setExamName={setExamName}
+          handleFilterSubmit={handleFilterSubmit}
+          rows={rows}
+        />
         <ExamCenterDetailsTable
           rows={filteredRows}
           columns={columns}

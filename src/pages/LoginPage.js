@@ -8,12 +8,14 @@ import {
   Typography,
   InputAdornment,
   IconButton,
-  Grid2,
-  Paper,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { keyframes } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
+import { endpoint } from "../services/endpoint";
+
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const backgroundAnimation = keyframes`
   0% {
@@ -45,17 +47,34 @@ const cornerAnimation = keyframes`
 `;
 
 const LoginPage = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = () => {
-    navigate("/admin/dashboard")
-    console.log("Login clicked");
+  const handleLogin = async () => {
+    const payload = { userName, password };
+
+    try {
+       const response = await axios.post(endpoint.candidate_login, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      localStorage.setItem("examDetails", JSON.stringify(response));
+      console.log("Authentication successful:", response);
+      navigate("/admin/dashboard");
+    } catch (error) {
+      setErrorMessage("Invalid username or password. Please try again.");
+      console.error("Authentication failed:", error.response?.data || error.message);
+    }
   };
+
 
   return (
     <Box
@@ -200,7 +219,7 @@ const LoginPage = () => {
             width={300}
             height={200}
             alt="login"
-            style={{ marginTop: 20,borderRadius:"7px" }}
+            style={{ marginTop: 20, borderRadius: "7px" }}
           />
         </Box>
 
@@ -231,8 +250,8 @@ const LoginPage = () => {
                 variant="h4"
                 component="div"
                 sx={{
-                  display:"flex",
-                  justifyContent:"center",
+                  display: "flex",
+                  justifyContent: "center",
                   textAlign: "center",
                   fontWeight: "bold",
                   marginBottom: 2,
@@ -255,13 +274,25 @@ const LoginPage = () => {
               >
                 Welcome back! Please login to your account.
               </Typography>
+              {errorMessage && (
+                <Typography
+                  variant="body2"
+                  color="error"
+                  textAlign="center"
+                  sx={{ marginBottom: 2 }}
+                >
+                  {errorMessage}
+                </Typography>
+              )}
               <Box component="form" noValidate autoComplete="off">
                 <TextField
-                  label="Email Address"
+                  label="userName"
                   variant="outlined"
                   fullWidth
                   margin="normal"
                   required
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                   InputProps={{
                     style: { borderRadius: 8 },
                   }}
@@ -273,6 +304,8 @@ const LoginPage = () => {
                   fullWidth
                   margin="normal"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   InputProps={{
                     style: { borderRadius: 8 },
                     endAdornment: (

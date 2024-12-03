@@ -21,7 +21,7 @@ const HeaderStatsCard = ({ title, value, change, detailsLink }) => {
           variant="body2"
           color={change > 0 ? "success.main" : "error.main"}
         >
-          {change > 0 ? `+${change}%` : `${change}%`} vs last month
+          {change > 0 ? `+${change}%` : `${change}%`} 
         </Typography>
         {detailsLink && (
           <Box mt={1}>

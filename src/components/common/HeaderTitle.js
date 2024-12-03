@@ -15,7 +15,6 @@ const HeaderTitle = ({ title,subTitle }) => {
       <Typography 
         variant="h6" 
         fontWeight="600" 
-        color="primary.main"
       >
         {subTitle} : {title}
       </Typography>
