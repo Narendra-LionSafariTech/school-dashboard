@@ -6,9 +6,8 @@ import * as XLSX from "xlsx";
 import AnalyticsChart from "../customChart/AnalaticsChart";
 
 const ExamCenterDetailsTable = ({ rows, columns, loading, selectedAnalytics }) => {
-  // Ensure rows have unique IDs
   const rowsWithIds = rows.map((row, index) => ({
-    id: row.id || index, // Use existing `id` or fallback to index
+    id: row.id || index,
     ...row,
   }));
 

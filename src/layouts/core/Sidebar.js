@@ -15,8 +15,19 @@ import {
   Settings as SettingsIcon,
   Logout as LogoutIcon,
 } from "@mui/icons-material";
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+  dispatch(logout());
+  navigate('/login'); 
+};
+
   return (
     <Drawer
       variant="permanent"
@@ -69,6 +80,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           {isOpen && <ListItemText primary="Operator" />}
         </ListItem>
         <ListItem button>
+          <ListItemIcon sx={{color: "#dadada" }}>
+            <SettingsIcon />
+          </ListItemIcon>
+          {isOpen && <ListItemText primary="tools" />}
+        </ListItem>
+        <ListItem button onClick={handleLogout}>
           <ListItemIcon sx={{ color: "#dadada" }}>
             <LogoutIcon />
           </ListItemIcon>

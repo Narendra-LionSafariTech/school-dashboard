@@ -13,9 +13,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { keyframes } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 import { endpoint } from "../services/endpoint";
-
+import { login } from '../redux/slices/authSlice';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const backgroundAnimation = keyframes`
   0% {
@@ -52,7 +53,7 @@ const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -66,7 +67,9 @@ const LoginPage = () => {
           'Content-Type': 'application/json',
         },
       });
-      localStorage.setItem("examDetails", JSON.stringify(response));
+      const userData = response?.data;
+      dispatch(login(userData));
+      localStorage.setItem("examDetails", JSON.stringify(response?.data));
       console.log("Authentication successful:", response);
       navigate("/admin/dashboard");
     } catch (error) {

@@ -8,7 +8,8 @@ import ExamCenterDetailsTable from "../../components/CustomTable/ExamCenterDetai
 import { examCenters } from "../../data/examCenter";
 import FilterComponent from "../../components/CustomTable/FilterComponent";
 import columns from "../../data/ExamCenterColumn";
-
+import ExamDetailsColumns from "../../data/ExamDetailsColumn";
+import { getStudentInfo, getStudentCount } from "../../services/admin.services";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,11 +28,47 @@ const AdminDashboard = () => {
   const [centerCode, setCenterCode] = useState("");
   const [shiftTime, setShiftTime] = useState("");
   const [examName, setExamName] = useState('');
+  const [isExamDetais, setIsExamDetails] = useState(true)
+
+  const fetchExamData = async (examName, shift) => {
+    try {
+      const response = await getStudentCount(examName, shift);
+      if (response.status === 200) {
+        const centerSummaries = response.data.map((item, index) => ({
+          sNo: index + 1,
+          centerCode: item.centerCode,
+          centerName: item.centerName,
+          shiftDate: item.shiftDate,
+          shiftTime: item.shiftTime,
+          totalStudents: item.totalStudents,
+          presentStudents: item.presentStudents,
+          presentUnenrolledRollNumbers: item.presentUnenrolledRollNumbers,
+          centerStatus: item.presentUnenrolledRollNumbers.length > 0,
+        }));
+  
+        setRows(centerSummaries);
+        setFilteredRows(centerSummaries);
+        setCenterCode(centerSummaries.map((item) => item.centerCode));
+      }
+    } catch (error) {
+      console.error("Error fetching exam data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
   useEffect(() => {
-    setRows(examCenters);
-    setFilteredRows(examCenters);
-    setLoading(false);
+    const examDetails = JSON.parse(localStorage.getItem("examDetails"));
+    if (examDetails) {
+      const { examName, shift } = examDetails;
+      setExamName(examName);
+      setShiftTime(shift);
+
+      const params = new URLSearchParams({ examName, shift });
+      window.history.replaceState(null, "", `?${params.toString()}`);
+      fetchExamData(examName, shift);
+    }
   }, []);
 
   const handleFilterSubmit = (e) => {
@@ -116,12 +153,23 @@ const AdminDashboard = () => {
           handleFilterSubmit={handleFilterSubmit}
           rows={rows}
         />
-        <ExamCenterDetailsTable
-          rows={filteredRows}
-          columns={columns}
-          loading={loading}
-          selectedAnalytics={selectedAnalytics}
-        />
+
+        {isExamDetais &&
+          <ExamCenterDetailsTable
+            rows={filteredRows}
+            columns={ExamDetailsColumns}
+            loading={loading}
+          />
+        }
+        {!isExamDetais &&
+          <ExamCenterDetailsTable
+            rows={filteredRows}
+            columns={columns}
+            loading={loading}
+            selectedAnalytics={selectedAnalytics}
+          />
+        }
+
       </Container>
     </div>
   );
